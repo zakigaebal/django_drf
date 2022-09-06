@@ -3,7 +3,7 @@
 
 from dataclasses import field
 from rest_framework import serializers
-from .models import humanInfo
+from .models import Accounts, humanInfo
 
 # 시리얼라이저에 있는 모델 시리얼라이저를 확장시킨 클래스
 class humanInfoSerializer(serializers.ModelSerializer):
@@ -13,3 +13,9 @@ class humanInfoSerializer(serializers.ModelSerializer):
         model = humanInfo
         # humanInfo에서 created를 제외한 나머지 필드만 Json파일로 바꿔주기
         fields = ['name','phone_number','address']
+        
+class AccountsSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Accounts
+        field = ('identify','password')

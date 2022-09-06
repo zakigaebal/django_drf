@@ -21,7 +21,9 @@ from mobile_app import views
 # 라우터 만들기
 router = routers.DefaultRouter()
 # tests라는 이름으로 humanInfoViewSet에 등록
-router.register(r'tests', views.hInfoViewSet)
+router.register(r'api/user', views.hInfoViewSet)
+router.register(r'userAccount', views.AccountViewSet)
+router.register(r'check', views.CheckAccountViewset)
 
 urlpatterns = [
     # admin/ 이라는 url 주소 통해서 접근하면 admin.site.urls로 접근한다.

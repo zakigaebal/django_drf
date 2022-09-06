@@ -1,3 +1,4 @@
+from pyexpat import model
 from unicodedata import name
 from django.db import models
 
@@ -14,3 +15,9 @@ class humanInfo(models.Model):
     
     #created 기준 오름차순 정렬
     class Meta : ordering = ['created']
+    
+    
+class Accounts(models.Model):
+    identify = models.CharField(default='identify', max_length=20)
+    password = models.CharField(default='password',max_length=20)
+    
