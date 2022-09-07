@@ -14,8 +14,13 @@ class humanInfoSerializer(serializers.ModelSerializer):
         # humanInfo에서 created를 제외한 나머지 필드만 Json파일로 바꿔주기
         fields = ['name','phone_number','address']
         
+        
 class AccountsSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Accounts
-        field = ('identify','password')
+        fields = ['identify','password']
+        
+        
+        
+

@@ -17,20 +17,26 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework import routers
 from mobile_app import views
-
 # 라우터 만들기
 router = routers.DefaultRouter()
 # tests라는 이름으로 humanInfoViewSet에 등록
 router.register(r'tests', views.hInfoViewSet)
-router.register(r'userAccount', views.AccountViewSet)
-router.register(r'check', views.CheckAccountViewset)
+router.register(r'accounts', views.AccountViewSet)
+
+
 
 urlpatterns = [
     # admin/ 이라는 url 주소 통해서 접근하면 admin.site.urls로 접근한다.
     path('admin/', admin.site.urls),
+    
+   
+    
     # mobile_app/ 이라는 url 주소 통해서 접근하여 include('mobile_app.urls')로 접근한다.
     path('mobile_app/',include('mobile_app.urls')),
+    
     # 라우터 url도 추가
     path('', include(router.urls)),
-    path('app_login/', views.app_login),
+    
+    
+    
 ]
