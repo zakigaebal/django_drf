@@ -21,7 +21,7 @@ from mobile_app import views
 # 라우터 만들기
 router = routers.DefaultRouter()
 # tests라는 이름으로 humanInfoViewSet에 등록
-router.register(r'api/user', views.hInfoViewSet)
+router.register(r'tests', views.hInfoViewSet)
 router.register(r'userAccount', views.AccountViewSet)
 router.register(r'check', views.CheckAccountViewset)
 
@@ -31,5 +31,6 @@ urlpatterns = [
     # mobile_app/ 이라는 url 주소 통해서 접근하여 include('mobile_app.urls')로 접근한다.
     path('mobile_app/',include('mobile_app.urls')),
     # 라우터 url도 추가
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('app_login/', views.app_login),
 ]

@@ -2,6 +2,9 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from mobile_app.models import humanInfo, Accounts
 from mobile_app.serializers import humanInfoSerializer, AccountsSerializer
+from django.http import JsonResponse
+from django.contrib.auth import authenticate
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -11,20 +14,25 @@ class hInfoViewSet(viewsets.ModelViewSet):
     # serializer_class는 humanInfoSerializer를 이용
     serializer_class = humanInfoSerializer
     
+    
 class AccountViewSet(viewsets.ModelViewSet):
     queryset = Accounts.objects.all()
     serializer_class = AccountsSerializer
     
-class CheckAccountViewset(viewsets.ModelViewSet):
-    queryset = Accounts.objects.all()
-    serializer_class = AccountsSerializer
+@csrf_exempt
+def app_login(request):
 
-    def create(self, request):
-        checkID = post_data['checkID']
-        checkPW = post_data['checkPW']
+    if request.method == 'POST':
+        print("리퀘스트 로그" + str(request.body))
+        id = request.POST.get('userid', '')
+        pw = request.POST.get('userpw', '')
+        print("id = " + id + " pw = " + pw)
 
-        if Accounts.objects.filter(identify=checkID).exists():
-            if Accounts.objects.filter(password=checkPW).exists():
-                return Response(status=200)
+        result = authenticate(username=id, password=pw)
 
-        return Response(status=400)
+        if result:
+            print("로그인!")
+            return JsonResponse({'code': '0000', 'msg': '로그인성공입니다.'}, status=200)
+        else:
+            print("실패")
+            return JsonResponse({'code': '1001', 'msg': '로그인실패입니다.'}, status=200)
